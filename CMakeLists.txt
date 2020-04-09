@@ -71,6 +71,9 @@ endif()
 add_custom_command(OUTPUT dispersion.o dispersion.h
                    COMMAND ${ISPC_EXECUTABLE} -g ${CMAKE_SOURCE_DIR}/dials_accelerated_dispersion/dispersion.ispc -o dispersion.o -h dispersion.h
                    DEPENDS dials_accelerated_dispersion/dispersion.ispc)
+
+add_library(accelerated_dispersion MODULE dials_accelerated_dispersion/ext.cxx dispersion.o)
+install(TARGETS accelerated_dispersion LIBRARY DESTINATION accelerated_dispersion)
 # --target=sse2-i32x8
 # add_subdirectory(external)
 # # add_subdirectory(fast_hdf5_eiger_read)
