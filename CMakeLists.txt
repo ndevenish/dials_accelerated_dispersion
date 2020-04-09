@@ -12,6 +12,7 @@ project(dials_accelerated_dispersion)
 # Add the included modules
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
+set(SRC ${CMAKE_SOURCE_DIR}/dials_accelerated_dispersion)
 # set(CMAKE_CXX_STANDARD 11)
 
 # find_package(Boost REQUIRED)
@@ -69,11 +70,12 @@ endif()
 #		Dials::Dials benchmark::benchmark Eigen::Eigen)
 
 add_custom_command(OUTPUT dispersion.o dispersion.h
-                   COMMAND ${ISPC_EXECUTABLE} -g ${CMAKE_SOURCE_DIR}/dials_accelerated_dispersion/dispersion.ispc -o dispersion.o -h dispersion.h
-                   DEPENDS dials_accelerated_dispersion/dispersion.ispc)
+                   COMMAND ${ISPC_EXECUTABLE} -g ${SRC}/dispersion.ispc -o dispersion.o -h dispersion.h
+                   DEPENDS ${SRC}/dispersion.ispc)
 
-add_library(accelerated_dispersion MODULE dials_accelerated_dispersion/ext.cxx dispersion.o)
+add_library(accelerated_dispersion MODULE ${SRC}/ext.cxx dispersion.o)
 install(TARGETS accelerated_dispersion LIBRARY DESTINATION accelerated_dispersion)
+
 # --target=sse2-i32x8
 # add_subdirectory(external)
 # # add_subdirectory(fast_hdf5_eiger_read)
