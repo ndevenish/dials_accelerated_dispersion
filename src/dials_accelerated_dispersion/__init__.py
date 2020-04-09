@@ -1,2 +1,3 @@
-class AcceleratedDispersionSpotfinderThreshold:
-    pass
+__all__ = ["AcceleratedDispersionSpotfinderThreshold"]
+
+from .dials_accelerated_dispersion_ext import AcceleratedDispersionSpotfinderThreshold
