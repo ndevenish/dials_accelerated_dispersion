@@ -2,6 +2,7 @@ __all__ = ["AcceleratedDispersionSpotfinderThreshold"]
 
 from typing import TYPE_CHECKING
 
+from dials.array_family import flex
 from libtbx import Auto
 
 from .dials_accelerated_dispersion_ext import accelerated_dispersion
@@ -41,12 +42,15 @@ class AcceleratedDispersionSpotfinderThreshold:
                 self.params.spotfinder.threshold.dispersion.global_threshold
             )
 
-        output_data = None
+        if not isinstance(image, flex.double):
+            image = image.as_float()
+
+        result = flex.bool(flex.grid(image.all()))
 
         accelerated_dispersion(
             image=image,
             mask=mask,
-            destination=output_data,
+            destination=result,
             gain=self.params.spotfinder.threshold.dispersion.gain,
             kernel_size=self.params.spotfinder.threshold.dispersion.kernel_size,
             n_sigma_b=self.params.spotfinder.threshold.dispersion.sigma_background,
@@ -54,4 +58,4 @@ class AcceleratedDispersionSpotfinderThreshold:
             threshold=threshold,
             min_count=self.params.spotfinder.threshold.dispersion.min_local,
         )
-        return output_data
+        return result
