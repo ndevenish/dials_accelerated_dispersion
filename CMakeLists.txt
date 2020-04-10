@@ -16,6 +16,7 @@ add_custom_command(OUTPUT dispersion.o dispersion.h
                    DEPENDS ${SRC}/dispersion.ispc)
 
 add_library(dials_accelerated_dispersion_ext MODULE ${SRC}/ext.cxx dispersion.o)
+target_include_directories(dials_accelerated_dispersion_ext PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 python_extension_module(dials_accelerated_dispersion_ext)
-target_link_libraries(dials_accelerated_dispersion_ext Boost::python)
+target_link_libraries(dials_accelerated_dispersion_ext Dials::Dials Boost::python)
 install(TARGETS dials_accelerated_dispersion_ext LIBRARY DESTINATION src/dials_accelerated_dispersion)
