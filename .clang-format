@@ -2,7 +2,7 @@
 BasedOnStyle: Google
 ---
 Language: Cpp
-IndentWidth: 2
+IndentWidth: 4
 ColumnLimit: 88
 # Put arguments and parameter on separate lines if they don't fit on one
 BinPackArguments: false
@@ -20,7 +20,7 @@ BreakBeforeBinaryOperators: NonAssignment
 # Open multiple namespaces on the same line
 CompactNamespaces: true
 # When wrapping lines, indent the continuation by this
-ContinuationIndentWidth: 2
+ContinuationIndentWidth: 4
 # case: line up with the switch rather than being indented
 IndentCaseLabels: false
 NamespaceIndentation: Inner
