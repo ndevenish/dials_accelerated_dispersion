@@ -11,9 +11,9 @@
 
 namespace af = scitbx::af;
 
-void accelerated_dispersion(const af::const_ref<float, af::c_grid<2> > &src,
+void accelerated_dispersion(const af::const_ref<double, af::c_grid<2> > &src,
                             const af::const_ref<bool, af::c_grid<2> > &mask,
-                            double gain,
+                            float gain,
                             af::ref<bool, af::c_grid<2> > dst,
                             af::int2 kernel_size,
                             double nsig_b,
@@ -23,7 +23,7 @@ void accelerated_dispersion(const af::const_ref<float, af::c_grid<2> > &src,
     // Convert everything to plain C objects to pass through
     const int width = src.accessor()[0];
     const int height = src.accessor()[1];
-    const float *image = &src[0];
+    const double *image = &src[0];
 
     // Convert the mask to int for now
     int *dst_int = new int[width * height];

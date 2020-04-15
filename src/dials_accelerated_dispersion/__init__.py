@@ -42,8 +42,9 @@ class AcceleratedDispersionSpotfinderThreshold:
                 self.params.spotfinder.threshold.dispersion.global_threshold
             )
 
-        if not isinstance(image, flex.double):
-            image = image.as_float()
+        # // Convert image to float
+        # if not isinstance(image, flex.float):
+        #     image = image.as_float()
 
         result = flex.bool(flex.grid(image.all()))
 
